@@ -8,7 +8,7 @@ const SignUp = () => {
           <h2 className="font-bold text-2xl">Welcome To River Travrls!</h2>
           <h4 className="text-xs">Please sign up with your email .</h4>
         </div>
-        <div className="w-full bg-red-700 p-1">
+        <div className="w-full bg-red-700 p-1 rounded-t-lg">
           <h1 className=" text-center text-white font-semibold border-t-rounded">
             Sign Up
           </h1>

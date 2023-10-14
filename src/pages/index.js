@@ -1,7 +1,14 @@
-export default function Home() {
+import RootLayout from "@/components/Layouts/RootLayout";
+import Herobanner from "@/components/UI/Herobanner";
+
+export default function HomePage() {
   return (
     <main>
-      <h2>Hello World</h2>
+      <Herobanner></Herobanner>
     </main>
   );
 }
+
+HomePage.getLayout = function getLayout(page) {
+  return <RootLayout>{page}</RootLayout>;
+};
