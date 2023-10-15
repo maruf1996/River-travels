@@ -1,4 +1,4 @@
-const StepsPart = () => {
+const Overview = () => {
   return (
     <section className="0">
       <div className="container mx-auto flex flex-col p-6">
@@ -114,4 +114,4 @@ const StepsPart = () => {
   );
 };
 
-export default StepsPart;
+export default Overview;

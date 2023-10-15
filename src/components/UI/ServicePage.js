@@ -4,7 +4,7 @@ const ServicePage = () => {
   return (
     <section className="p-6 mt-6 bg-teal-800 text-gray-100">
       <h1 className="text-4xl md:text-6xl font-bold text-center">
-        Our Services
+        Choose Your Favorite Services
       </h1>
       <div className="container grid grid-cols-1 gap-6 mx-auto sm:grid-cols-2 xl:grid-cols-3 mt-6">
         <Link
