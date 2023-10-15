@@ -3,8 +3,20 @@ import { useForm } from "react-hook-form";
 
 const SignUp = () => {
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    // console.log(data);
+    try {
+      const res = await fetch(`http://localhost:5000/api/v1/auth/signup`, {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" },
+      });
+      const user = await res.json();
+      // console.log(user);
+    } catch (error) {
+      console.log(error);
+      throw new Error(error.message);
+    }
   };
 
   return (
@@ -34,7 +46,7 @@ const SignUp = () => {
                 type="text"
                 placeholder="Phone"
                 className="input input-bordered"
-                {...register("phone", { required: true })}
+                {...register("contactNo", { required: true })}
               />
             </div>
             <div className="form-control">
@@ -43,6 +55,14 @@ const SignUp = () => {
                 placeholder="Gender"
                 className="input input-bordered"
                 {...register("gender", { required: true })}
+              />
+            </div>
+            <div className="form-control">
+              <input
+                type="text"
+                placeholder="Role"
+                className="input input-bordered"
+                {...register("role", { required: true })}
               />
             </div>
             <div className="form-control">
@@ -58,15 +78,7 @@ const SignUp = () => {
                 type="text"
                 placeholder="Address"
                 className="input input-bordered"
-                {...register("addres", { required: true })}
-              />
-            </div>
-            <div className="form-control">
-              <input
-                type="text"
-                placeholder="Dropping Point"
-                className="input input-bordered"
-                {...register("dropp", { required: true })}
+                {...register("address", { required: true })}
               />
             </div>
             <div className="form-control">
