@@ -1,8 +1,10 @@
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 
 const SignUp = () => {
   const { register, handleSubmit } = useForm();
+  const router = useRouter();
   const onSubmit = async (data) => {
     // console.log(data);
     try {
@@ -13,6 +15,9 @@ const SignUp = () => {
       });
       const user = await res.json();
       // console.log(user);
+      if (user.status === "success") {
+        router.push("/signIn");
+      }
     } catch (error) {
       console.log(error);
       throw new Error(error.message);
@@ -20,7 +25,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="min-h-screen m-8 flex justify-center items-center bg-white">
+    <div className="min-h-screen flex justify-center items-center bg-white p-16">
       <div className="md:w-4/12 w-11/12">
         <div className="text-center mb-2">
           <h2 className="font-bold text-2xl">Welcome To River Travrls!</h2>

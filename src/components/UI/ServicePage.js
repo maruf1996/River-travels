@@ -11,7 +11,7 @@ const ServicePage = () => {
           href=""
           className="flex p-4 md:p-8 justify-center space-x-4 rounded-lg md:space-x-6 bg-yellow-800 text-white"
         >
-          <h2 className="text-3xl md:text-4xl">DEC</h2>
+          <h2 className="text-3xl md:text-4xl uppercase">Chair Choch</h2>
         </Link>
         <Link
           href=""

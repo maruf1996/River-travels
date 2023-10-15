@@ -14,15 +14,18 @@ const Navbar = () => {
       <div className=" text-gray-800 bg-white">
         <div className="p-4 container flex justify-between items-center h-12 md:h-16 mx-auto">
           <div className="">
-            <h1 className="text-2xl md:text-4xl font-bold font-roboto">
+            <Link
+              href="/"
+              className="text-2xl md:text-4xl font-bold font-roboto"
+            >
               River Travels
-            </h1>
+            </Link>
           </div>
           <div className="">
             <ul className="items-stretch hidden space-x-3 lg:flex">
               <li className="flex">
                 <Link
-                  href=""
+                  href="/"
                   className="flex items-center uppercase px-4 hover:text-red-600 text-sm tracking-wide"
                 >
                   Home
@@ -93,7 +96,7 @@ const Navbar = () => {
           >
             <li className="py-2 border-y-2 ">
               <Link
-                href=""
+                href="/"
                 className="p-4 uppercase hover:text-red-600 text-sm tracking-wide"
               >
                 Home
