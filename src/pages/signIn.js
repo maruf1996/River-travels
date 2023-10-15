@@ -1,8 +1,14 @@
 import Link from "next/link";
+import { useForm } from "react-hook-form";
 
 const SignIn = () => {
+  const { register, handleSubmit } = useForm();
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
   return (
-    <div className="min-h-screen flex justify-center items-center">
+    <div className="min-h-screen flex justify-center items-center bg-white">
       <div className="md:w-3/12 w-11/12">
         <div className="text-center mb-2">
           <h2 className="font-bold text-2xl">Welcome To River Travrls!</h2>
@@ -14,16 +20,16 @@ const SignIn = () => {
           </h1>
         </div>
         <div className="card flex-shrink-0 w-full shadow-2xl bg-base-100">
-          <form className="card-body">
+          <form onSubmit={handleSubmit(onSubmit)} className="card-body">
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
               </label>
               <input
+                {...register("email", { required: true })}
                 type="email"
                 placeholder="email"
                 className="input input-bordered"
-                required
               />
             </div>
             <div className="form-control">
@@ -34,7 +40,7 @@ const SignIn = () => {
                 type="password"
                 placeholder="password"
                 className="input input-bordered"
-                required
+                {...register("password", { required: true })}
               />
             </div>
             <div className="mt-6 flex justify-center">

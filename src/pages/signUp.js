@@ -1,8 +1,14 @@
 import Link from "next/link";
+import { useForm } from "react-hook-form";
 
 const SignUp = () => {
+  const { register, handleSubmit } = useForm();
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
   return (
-    <div className="min-h-screen m-8 flex justify-center items-center">
+    <div className="min-h-screen m-8 flex justify-center items-center bg-white">
       <div className="md:w-4/12 w-11/12">
         <div className="text-center mb-2">
           <h2 className="font-bold text-2xl">Welcome To River Travrls!</h2>
@@ -14,13 +20,13 @@ const SignUp = () => {
           </h1>
         </div>
         <div className="card flex-shrink-0 w-full shadow-2xl bg-base-100">
-          <form className="card-body">
+          <form onSubmit={handleSubmit(onSubmit)} className="card-body">
             <div className="form-control">
               <input
                 type="text"
                 placeholder="Name"
                 className="input input-bordered"
-                required
+                {...register("name", { required: true })}
               />
             </div>
             <div className="form-control">
@@ -28,7 +34,7 @@ const SignUp = () => {
                 type="text"
                 placeholder="Phone"
                 className="input input-bordered"
-                required
+                {...register("phone", { required: true })}
               />
             </div>
             <div className="form-control">
@@ -36,15 +42,15 @@ const SignUp = () => {
                 type="text"
                 placeholder="Gender"
                 className="input input-bordered"
-                required
+                {...register("gender", { required: true })}
               />
             </div>
             <div className="form-control">
               <input
-                type="text"
+                type="number"
                 placeholder="Age"
                 className="input input-bordered"
-                required
+                {...register("age", { required: true })}
               />
             </div>
             <div className="form-control">
@@ -52,7 +58,7 @@ const SignUp = () => {
                 type="text"
                 placeholder="Address"
                 className="input input-bordered"
-                required
+                {...register("addres", { required: true })}
               />
             </div>
             <div className="form-control">
@@ -60,7 +66,7 @@ const SignUp = () => {
                 type="text"
                 placeholder="Dropping Point"
                 className="input input-bordered"
-                required
+                {...register("dropp", { required: true })}
               />
             </div>
             <div className="form-control">
@@ -68,7 +74,7 @@ const SignUp = () => {
                 type="email"
                 placeholder="Email"
                 className="input input-bordered"
-                required
+                {...register("email", { required: true })}
               />
             </div>
             <div className="form-control">
@@ -76,7 +82,7 @@ const SignUp = () => {
                 type="password"
                 placeholder="Password"
                 className="input input-bordered"
-                required
+                {...register("password", { required: true })}
               />
             </div>
             <div className="mt-6 flex justify-center">
