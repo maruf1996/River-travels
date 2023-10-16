@@ -1,14 +1,27 @@
+import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 
 const SignIn = () => {
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
+
+  const onSubmit = async (data) => {
+    // console.log(data);
+    const result = await signIn("river-travels", {
+      email: data.email,
+      password: data.password,
+      redirect: false,
+      callbackUrl: "/",
+    });
+    // console.log(result, "result");
+    if (result?.ok && !result.error) {
+      // router.push("/");
+      console.log("success");
+    }
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-white p-16">
+    <div className="min-h-screen flex justify-center items-center bg-white p-6">
       <div className="md:w-3/12 w-11/12">
         <div className="text-center mb-2">
           <h2 className="font-bold text-2xl">Welcome To River Travrls!</h2>
@@ -20,7 +33,7 @@ const SignIn = () => {
           </h1>
         </div>
         <div className="card flex-shrink-0 w-full shadow-2xl bg-base-100">
-          <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+          <form onClick={handleSubmit(onSubmit)} className="card-body">
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>

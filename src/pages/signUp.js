@@ -6,7 +6,7 @@ const SignUp = () => {
   const { register, handleSubmit } = useForm();
   const router = useRouter();
   const onSubmit = async (data) => {
-    // console.log(data);
+    console.log(data);
     try {
       const res = await fetch(`http://localhost:5000/api/v1/auth/signup`, {
         method: "POST",
@@ -55,20 +55,13 @@ const SignUp = () => {
               />
             </div>
             <div className="form-control">
-              <input
-                type="text"
-                placeholder="Gender"
-                className="input input-bordered"
-                {...register("gender", { required: true })}
-              />
-            </div>
-            <div className="form-control">
-              <input
-                type="text"
-                placeholder="Role"
-                className="input input-bordered"
-                {...register("role", { required: true })}
-              />
+              <label className="input input-bordered flex items-center justify-between">
+                Gender:
+                <select name="male" {...register("gender", { required: true })}>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+              </label>
             </div>
             <div className="form-control">
               <input
