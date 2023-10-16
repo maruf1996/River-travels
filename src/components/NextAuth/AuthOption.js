@@ -1,5 +1,6 @@
 import { jwtHelpers } from "@/Helpers/jwtHelpers";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { getNewAccessToken } from "./getNewAccessToken";
 
 export const AuthOptions = {
   // Configure one or more authentication providers
@@ -17,6 +18,7 @@ export const AuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
+        // console.log(credentials);
         try {
           const res = await fetch(`http://localhost:5000/api/v1/auth/signin`, {
             method: "POST",
@@ -28,7 +30,7 @@ export const AuthOptions = {
             token,
             process.env.JWT_SECRET
           );
-          //   console.log(token, "auth option");
+          //   console.log(verifiedToken, "auth option");
           if (res.ok && token) {
             return {
               token,
@@ -44,25 +46,27 @@ export const AuthOptions = {
   ],
   callbacks: {
     async jwt({ token, user }) {
-      // console.log(token, "token auth option")
-      // console.log(user, "user auth option")
+      console.log(token, "token auth option");
+      //   console.log(user, "user auth option");
       return {
-        token,
+        ...token,
         ...user,
       };
     },
     async session({ session, token }) {
-      // console.log(session, "session auth option")
-      // console.log(token, "token auth option inside session")
-      //   const verifiedToken = jwtHelpers.verifyToken(
-      //     token,
-      //     process.env.JWT_SECRET
-      //   );
-      //   if (!verifiedToken) {
-      //     console.log("token expired so new token generated");
-      //     const { data } = await getNewAccessToken(token?.accessToken);
-      //     token.accessToken = data?.accessToken;
-      //   }
+      //   console.log(session, "session auth option");
+      console.log(token?.token, "token auth option inside session");
+      const verifiedToken = jwtHelpers.verifyToken(
+        token?.token,
+        process.env.JWT_SECRET
+      );
+      //   console.log(verifiedToken);
+      if (!verifiedToken) {
+        console.log("token expired so new token generated");
+        const data = await getNewAccessToken(token?.token);
+        // console.log(data);
+        token.token = data?.refreshToken;
+      }
       return {
         ...session,
         ...token,

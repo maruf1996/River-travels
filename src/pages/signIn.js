@@ -1,9 +1,12 @@
 import { signIn } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 
 const SignIn = () => {
   const { register, handleSubmit } = useForm();
+  const router = useRouter();
 
   const onSubmit = async (data) => {
     // console.log(data);
@@ -11,12 +14,16 @@ const SignIn = () => {
       email: data.email,
       password: data.password,
       redirect: false,
-      callbackUrl: "/",
+      // callbackUrl: "/",
     });
     // console.log(result, "result");
     if (result?.ok && !result.error) {
-      // router.push("/");
-      console.log("success");
+      Swal.fire({
+        icon: "success",
+        title: "Success",
+        text: "Sign In Successfully",
+      });
+      router.back();
     }
   };
 

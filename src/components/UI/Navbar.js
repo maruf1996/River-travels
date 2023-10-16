@@ -5,7 +5,7 @@ import { useState } from "react";
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const session = useSession();
-  console.log(session);
+  // console.log(session);
 
   return (
     <header className="">
