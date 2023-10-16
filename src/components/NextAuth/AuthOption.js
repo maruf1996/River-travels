@@ -46,7 +46,7 @@ export const AuthOptions = {
   ],
   callbacks: {
     async jwt({ token, user }) {
-      console.log(token, "token auth option");
+      // console.log(token, "token auth option");
       //   console.log(user, "user auth option");
       return {
         ...token,
@@ -55,14 +55,14 @@ export const AuthOptions = {
     },
     async session({ session, token }) {
       //   console.log(session, "session auth option");
-      console.log(token?.token, "token auth option inside session");
+      // console.log(token?.token, "token auth option inside session");
       const verifiedToken = jwtHelpers.verifyToken(
         token?.token,
         process.env.JWT_SECRET
       );
       //   console.log(verifiedToken);
       if (!verifiedToken) {
-        console.log("token expired so new token generated");
+        // console.log("token expired so new token generated");
         const data = await getNewAccessToken(token?.token);
         // console.log(data);
         token.token = data?.refreshToken;

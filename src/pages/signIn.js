@@ -24,6 +24,12 @@ const SignIn = () => {
         text: "Sign In Successfully",
       });
       router.back();
+    } else {
+      Swal.fire({
+        title: "Oops...",
+        text: "Something went wrong!",
+        text: "Sign In Successfully",
+      });
     }
   };
 

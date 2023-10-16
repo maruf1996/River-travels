@@ -1,21 +1,24 @@
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable jsx-a11y/alt-text */
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useState } from "react";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const [pOpen, pSetOpen] = useState(false);
   const session = useSession();
-  // console.log(session);
+  console.log(session);
 
   return (
     <header className="">
-      <div className="bg-red-800 w-full p-2 text-center text-gray-100">
+      <div className="bg-red-800 p-2 w-full text-center text-gray-100">
         <h1 className="text-xs md:text-sm">
           Hotline: +8801778907918, +8801978907918 (06:00AM-12:00AM)
         </h1>
       </div>
       <div className=" text-gray-800 bg-white">
-        <div className="p-4 container flex justify-between items-center h-12 md:h-16 mx-auto">
+        <div className="p-2 container flex justify-between items-center h-12 md:h-16 mx-auto">
           <div className="">
             <Link
               href="/"
@@ -68,10 +71,44 @@ const Navbar = () => {
               </li>
             </ul>
           </div>
-          <div className="items-center flex-shrink-0 hidden lg:flex">
-            <Link href="" className="self-center px-8 py-3 rounded btn">
-              Dashboard
-            </Link>
+          <div className="hidden md:block">
+            {!session?.status === "authenticated" ? (
+              <Link href="/signIn" className="font-semibold text-green-800">
+                signIn
+              </Link>
+            ) : (
+              <div className="dropdown dropdown-end">
+                <label
+                  tabIndex={0}
+                  onClick={() => pSetOpen(!pOpen)}
+                  className="btn btn-ghost btn-circle avatar"
+                >
+                  <div className="w-10 rounded-full">
+                    <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                  </div>
+                </label>
+                {pOpen && (
+                  <ul
+                    tabIndex={0}
+                    className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-28"
+                  >
+                    <li>
+                      <Link href="/" className="justify-between">
+                        Profile
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/" className="justify-between">
+                        Dashboard
+                      </Link>
+                    </li>
+                    <li className="">
+                      <button>Logout</button>
+                    </li>
+                  </ul>
+                )}
+              </div>
+            )}
           </div>
           <button onClick={() => setOpen(!open)} className="p-4 lg:hidden">
             <svg
@@ -138,9 +175,28 @@ const Navbar = () => {
               </Link>
             </li>
             <li className="py-2 border-b-2">
-              <button className="p-4 font-bold uppercase hover:text-red-600 text-sm tracking-wide">
+              <Link
+                href=""
+                className="p-4 uppercase hover:text-red-600 text-sm tracking-wide"
+              >
+                Profile
+              </Link>
+            </li>
+            <li className="py-2 border-b-2">
+              <Link
+                href=""
+                className="p-4 uppercase hover:text-red-600 text-sm tracking-wide"
+              >
                 Dashboard
-              </button>
+              </Link>
+            </li>
+            <li className="py-2 border-b-2">
+              <Link
+                href=""
+                className="p-4 uppercase hover:text-red-600 text-sm tracking-wide"
+              >
+                Login
+              </Link>
             </li>
           </ul>
         </div>

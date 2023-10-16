@@ -1,5 +1,5 @@
 export const getNewAccessToken = async (token) => {
-  console.log(token);
+  // console.log(token);
   try {
     const res = await fetch(`http://localhost:5000/api/v1/auth/refresh-token`, {
       method: "POST",
@@ -9,7 +9,7 @@ export const getNewAccessToken = async (token) => {
       },
     });
     const { data } = await res.json();
-    console.log(data);
+    // console.log(data);
     return data;
   } catch (error) {
     console.log(error);
