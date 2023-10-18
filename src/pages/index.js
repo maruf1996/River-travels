@@ -1,10 +1,10 @@
 import RootLayout from "@/components/Layouts/RootLayout";
-import Herobanner from "@/components/UI/Herobanner";
-import LatestLounch from "@/components/UI/LatestLounch";
-import Overview from "@/components/UI/Overview";
-import Review from "@/components/UI/Review";
-import ServicePage from "@/components/UI/ServicePage";
-import Upcoming from "@/components/UI/Upcoming";
+import Herobanner from "@/components/UI/Home/Herobanner";
+import LatestLounch from "@/components/UI/Home/LatestLounch";
+import Overview from "@/components/UI/Home/Overview";
+import Review from "@/components/UI/Home/Review";
+import ServicePage from "@/components/UI/Home/ServicePage";
+import Upcoming from "@/components/UI/Home/Upcoming";
 
 export default function HomePage() {
   return (

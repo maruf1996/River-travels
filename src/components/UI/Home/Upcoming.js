@@ -1,9 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 const Upcoming = () => {
   return (
-    <div className="container my-8 w-11/12 md:w-10/12 mx-auto ">
+    <div className="container my-8 w-11/12 lg:w-10/12 mx-auto ">
       <h2 className="text-4xl font-bold text-center">Upcoming Services</h2>
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3 mt-8">
+      <div className="grid grid-cols-1 gap-6  xl:grid-cols-3 mt-8">
         <div className="card border border-red-300 rounded-md">
           <img
             src="/assets/upcoming/tourse-1.jpg"

@@ -1,4 +1,3 @@
-import RootLayout from "@/components/Layouts/RootLayout";
 import "@/styles/globals.css";
 import { SessionProvider } from "next-auth/react";
 
@@ -6,11 +5,10 @@ export default function MyApp({
   Component,
   pageProps: { session, ...pageProps },
 }) {
+  const getLayout = Component.getLayout || ((page) => page);
   return (
     <SessionProvider session={session}>
-      <RootLayout>
-        <Component {...pageProps} />
-      </RootLayout>
+      {getLayout(<Component {...pageProps} />)}
     </SessionProvider>
   );
 }

@@ -14,7 +14,7 @@ module.exports = {
         inter: ["Inter", "sans-serif"],
         poppins: ["Poppins", "sans-serif"],
         roboto: ["Roboto", "sans-serif"],
-        "Player-Display": ["Playfair Display", "serif"],
+        yeseva: ["Yeseva One", "serif"],
       },
     },
   },

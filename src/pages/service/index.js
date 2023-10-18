@@ -1,31 +1,20 @@
+import RootLayout from "@/components/Layouts/RootLayout";
 import { useForm } from "react-hook-form";
 
 const Service = () => {
   const { register, handleSubmit } = useForm();
   const onSubmit = async (data) => {
     console.log(data);
-    try {
-      const res = await fetch(`http://localhost:5000/api/v1/auth/signup`, {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: { "Content-Type": "application/json" },
-      });
-      const user = await res.json();
-      // console.log(user);
-    } catch (error) {
-      console.log(error);
-      throw new Error(error.message);
-    }
   };
   return (
-    <div className="w-11/12 md:w-6/12 mx-auto my-8">
+    <div className="w-11/12 lg:w-6/12 mx-auto my-8">
       <div className="card flex-shrink-0 w-full shadow-2xl bg-base-100">
         <form onSubmit={handleSubmit(onSubmit)} className="card-body">
           <div className="form-control">
-            <label className="input input-bordered flex items-center justify-between">
+            <label className=" flex items-center justify-between">
               From:
               <select
-                className="border-none outline-none bg-base-100"
+                className="ml-3 bg-base-100 w-10/12 md:w-11/12 input input-bordered"
                 name="From"
                 {...register("from", { required: true })}
               >
@@ -35,10 +24,10 @@ const Service = () => {
             </label>
           </div>
           <div className="form-control">
-            <label className="input input-bordered flex items-center justify-between">
+            <label className=" flex items-center justify-between">
               To:
               <select
-                className="border-none outline-none bg-base-100"
+                className="ml-3 w-10/12  md:w-11/12 bg-base-100 input input-bordered"
                 name="To"
                 {...register("to", { required: true })}
               >
@@ -48,15 +37,18 @@ const Service = () => {
             </label>
           </div>
           <div className="form-control">
-            <input
-              type="date"
-              placeholder="Date"
-              className="input input-bordered"
-              {...register("date", { required: true })}
-            />
+            <label className="flex items-center justify-between">
+              Date:
+              <input
+                type="date"
+                placeholder="Date"
+                className="input ml-3 w-10/12  md:w-11/12 input-bordered  "
+                {...register("date", { required: true })}
+              />
+            </label>
           </div>
           <div className="mt-6 flex justify-center">
-            <button className="btn btn-md bg-red-700 hover:bg-red-600 text-white uppercase px-8">
+            <button className="btn btn-sm md:btn-md bg-red-700 hover:bg-red-600 text-white uppercase px-8">
               Search
             </button>
           </div>
@@ -110,3 +102,7 @@ const Service = () => {
 };
 
 export default Service;
+
+Service.getLayout = function getLayout(page) {
+  return <RootLayout>{page}</RootLayout>;
+};

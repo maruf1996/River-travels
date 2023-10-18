@@ -53,16 +53,16 @@ const reviews = [
 
 const Review = () => {
   return (
-    <section className="my-12 md:my-20 dark:bg-gray-800 dark:text-gray-100">
-      <div className="container flex flex-col items-center mx-auto md:px-12">
-        <h1 className="px-4 text-4xl font-semibold leadi text-center">
+    <section className="my-12 lg:my-20 dark:bg-gray-800 dark:text-gray-100">
+      <div className="container flex flex-col items-center mx-auto md:px-4">
+        <h1 className="px-4 text-3xl lg:text-4xl font-semibold leadi text-center">
           What our customers are saying about us
         </h1>
       </div>
-      <div className="container flex flex-col items-center justify-center mx-auto lg:flex-row lg:flex-wrap lg:justify-evenly lg:px-10">
+      <div className="container flex flex-col items-center justify-center mx-auto md:flex-row md:flex-wrap md:justify-evenly px-2 lg:px-10">
         {reviews?.slice(0, 6).map((review) => (
           <>
-            <div className="flex flex-col max-w-sm mx-4 my-6 shadow-lg">
+            <div className="flex flex-col lg:max-w-sm mx-4 my-6 shadow-lg">
               <div className="px-4 py-12 rounded-t-lg sm:px-8 md:px-12 dark:bg-gray-900">
                 <p className="relative px-6 py-1 text-lg italic text-center dark:text-gray-100">
                   <svg

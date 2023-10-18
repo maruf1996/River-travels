@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const Herobanner = () => {
   return (
-    <div className="bg-cover bg-center h-[80vh] relative ">
+    <div bac className="bg-cover bg-center h-[90vh] relative">
       <img
         src="/assets/lonch.jpg"
         alt="Hero Background"

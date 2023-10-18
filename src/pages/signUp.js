@@ -25,8 +25,8 @@ const SignUp = () => {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-white p-16">
-      <div className="md:w-4/12 w-11/12">
+    <div className="min-h-screen flex justify-center items-center bg-white p-4">
+      <div className="lg:w-4/12 w-11/12">
         <div className="text-center mb-2">
           <h2 className="font-bold text-2xl">Welcome To River Travrls!</h2>
           <h4 className="text-xs">Please sign up with your email .</h4>
@@ -57,7 +57,11 @@ const SignUp = () => {
             <div className="form-control">
               <label className="input input-bordered flex items-center justify-between">
                 Gender:
-                <select name="male" {...register("gender", { required: true })}>
+                <select
+                  className="w-10/12 bg-base-100 outline-none text-end"
+                  name="male"
+                  {...register("gender", { required: true })}
+                >
                   <option value="male">Male</option>
                   <option value="female">Female</option>
                 </select>
