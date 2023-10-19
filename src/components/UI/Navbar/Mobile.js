@@ -1,10 +1,11 @@
 import Link from "next/link";
 
-const Mobile = ({ navLinks, open }) => {
+const Mobile = ({ navLinks, open, setOpen }) => {
   return (
     <div>
       <div className="lg:hidden">
         <ul
+          onClick={() => setOpen(!open)}
           className={`items-stretch mt-3 ${
             open
               ? "flex flex-col fixed right-0 top-0 w-[80%] md:w-[50%] ease-in-out duration-500 bg-slate-300 h-full z-10 !important"

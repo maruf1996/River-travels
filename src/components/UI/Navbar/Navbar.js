@@ -22,7 +22,7 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [dashboarOpen, dashboarSetOpen] = useState(false);
   const session = useSession();
-  console.log(session);
+  // console.log(session);
 
   return (
     <header className="">
@@ -33,9 +33,9 @@ const Navbar = () => {
             <Title></Title>
           </div>
           <div className="hidden lg:block">
-            <ul className="items-stretch lg:flex space-x-3 ">
+            <ul className="items-stretch lg:flex space-x-3">
               {navLinks.map((link) => (
-                <li key={link.key} className="">
+                <li key={link.id}>
                   <Link
                     href={link.link}
                     className="flex items-center uppercase px-4 hover:text-red-600 text-sm tracking-wide"
@@ -47,8 +47,8 @@ const Navbar = () => {
             </ul>
           </div>
           <div className="">
-            {!session?.status === "authenticated" ? (
-              <Link href="/signIn" className="font-semibold text-green-800">
+            {session?.data === null ? (
+              <Link href="/signIn" className="font-semibold text-red-800">
                 signIn
               </Link>
             ) : (
@@ -75,8 +75,11 @@ const Navbar = () => {
           </div>
         </div>
         {/* mobile ul  */}
-        <Mobile navLinks={navLinks} open={open}></Mobile>
-        <Sidebar dashboarOpen={dashboarOpen}></Sidebar>
+        <Mobile navLinks={navLinks} open={open} setOpen={setOpen}></Mobile>
+        <Sidebar
+          dashboarOpen={dashboarOpen}
+          dashboarSetOpen={dashboarSetOpen}
+        ></Sidebar>
       </div>
     </header>
   );

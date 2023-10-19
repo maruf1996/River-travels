@@ -9,10 +9,11 @@ const links = [
   { id: "6", link: "/dashboard/my-profile", title: "Admin Management" },
 ];
 
-const Sidebar = ({ dashboarOpen }) => {
+const Sidebar = ({ dashboarOpen, dashboarSetOpen }) => {
   return (
     <aside className="">
       <ul
+        onClick={() => dashboarSetOpen(!dashboarOpen)}
         className={`items-stretch mt-1 ${
           dashboarOpen
             ? "flex flex-col fixed left-0 top-0 w-[80%] md:w-[40%] lg:w-[20%] ease-in-out duration-500 bg-slate-300 h-full z-10 !important"

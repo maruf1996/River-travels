@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
   const { register, handleSubmit } = useForm();
@@ -16,7 +17,18 @@ const SignUp = () => {
       const user = await res.json();
       // console.log(user);
       if (user.status === "success") {
+        Swal.fire({
+          icon: "success",
+          title: "Success",
+          text: "Sign In Successfully",
+        });
         router.push("/signIn");
+      } else {
+        Swal.fire({
+          title: "Oops...",
+          text: "Something went wrong!",
+          text: "Sign In Successfully",
+        });
       }
     } catch (error) {
       console.log(error);

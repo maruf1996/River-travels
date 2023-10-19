@@ -23,7 +23,7 @@ const SignIn = () => {
         title: "Success",
         text: "Sign In Successfully",
       });
-      router.back();
+      router.push("/");
     } else {
       Swal.fire({
         title: "Oops...",
