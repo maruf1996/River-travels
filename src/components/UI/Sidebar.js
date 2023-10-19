@@ -4,9 +4,16 @@ const links = [
   { id: "1", link: "/dashboard/my-profile", title: "My Profile" },
   { id: "2", link: "/dashboard/my-booking", title: "My Bookings" },
   { id: "3", link: "/dashboard/root-management", title: "Root Management" },
-  { id: "4", link: "/dashboard/launch-management", title: "Launch Management" },
-  { id: "5", link: "/dashboard/my-profile", title: "Stuff Management" },
-  { id: "6", link: "/dashboard/my-profile", title: "Admin Management" },
+  {
+    id: "4",
+    link: "/dashboard/shedule-management",
+    title: "Shedule Management",
+  },
+  { id: "9", link: "/dashboard/add-launch", title: "Add a Launch" },
+  { id: "5", link: "/dashboard/launch-management", title: "Launch Management" },
+  { id: "6", link: "/dashboard/add-stuff", title: "Add a Stuff" },
+  { id: "7", link: "/dashboard/add-admin", title: "Add a Admin" },
+  { id: "8", link: "/dashboard/user-management", title: "User Management" },
 ];
 
 const Sidebar = ({ dashboarOpen, dashboarSetOpen }) => {

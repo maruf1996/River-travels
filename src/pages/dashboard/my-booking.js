@@ -1,3 +1,5 @@
+import DashboardLayout from "@/components/Layouts/DashboardLayout";
+
 const MyBooking = () => {
   return (
     <div>
@@ -7,3 +9,7 @@ const MyBooking = () => {
 };
 
 export default MyBooking;
+
+MyBooking.getLayout = function getLayout(page) {
+  return <DashboardLayout>{page}</DashboardLayout>;
+};

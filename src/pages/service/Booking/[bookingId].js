@@ -1,52 +1,82 @@
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useSingleLaunchQuery } from "@/Redux/features/launchs/launchApi";
+import Loading from "@/components/UI/Loading";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 
-const SignUp = () => {
-  const { register, handleSubmit } = useForm();
+const Booking = () => {
   const router = useRouter();
+  const { data, isLoading } = useSingleLaunchQuery(router.query.bookingId);
+  const { register, handleSubmit } = useForm();
+
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
+
+  const launch = data?.data;
+  //   console.log(launch);
+
   const onSubmit = async (data) => {
-    console.log(data);
+    let price;
+    if (data.seat === "chairCoachSeat") {
+      price = launch?.chairCoachFare;
+    }
+    if (data.seat === "singleCabinSeat") {
+      price = launch?.singleCabinFare;
+    }
+    if (data.seat === "vipCabinSeat") {
+      price = launch?.vipCabinFare;
+    }
+
+    const bookingData = {
+      name: data.name,
+      contactNo: data.contactNo,
+      gender: data.gender,
+      age: data.age,
+      address: data.address,
+      email: data.email,
+      launch: launch?.name,
+      root: launch?.root?.name,
+      seat: data.seat,
+      fare: price,
+    };
     try {
-      const res = await fetch(`http://localhost:5000/api/v1/auth/signup`, {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: { "Content-Type": "application/json" },
-      });
-      const user = await res.json();
+      const res = await fetch(
+        `http://localhost:5000/api/v1/booking/create-booking`,
+        {
+          method: "POST",
+          body: JSON.stringify(bookingData),
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      const booking = await res.json();
       // console.log(user);
-      if (user.status === "success") {
+      if (booking.status === "success") {
         Swal.fire({
           icon: "success",
           title: "Success",
-          text: "Sign up Successfully",
+          text: "Booking Created Successfully",
         });
-        router.push("/signIn");
+        router.push("/dashboard/my-booking");
       } else {
         Swal.fire({
           title: "Oops...",
           text: "Something went wrong!",
-          text: "Sign up Successfully",
         });
       }
     } catch (error) {
       console.log(error);
       throw new Error(error.message);
     }
+    // console.log(bookingData);
   };
 
   return (
     <div className="min-h-screen flex justify-center items-center bg-white p-4">
       <div className="lg:w-4/12 w-11/12">
         <div className="text-center mb-2">
-          <h2 className="font-bold text-2xl">Welcome To River Travrls!</h2>
-          <h4 className="text-xs">Please sign up with your email .</h4>
-        </div>
-        <div className="w-full bg-red-700 p-1 rounded-t-lg">
-          <h1 className=" text-center text-white font-semibold border-t-rounded">
-            Sign Up
-          </h1>
+          <h2 className="font-bold text-2xl">Booking of {launch?.name}</h2>
+          <h4 className="text-xs">fill the all requirement</h4>
         </div>
         <div className="card flex-shrink-0 w-full shadow-2xl bg-base-100">
           <form onSubmit={handleSubmit(onSubmit)} className="card-body">
@@ -104,31 +134,31 @@ const SignUp = () => {
               />
             </div>
             <div className="form-control">
-              <input
-                type="password"
-                placeholder="Password"
-                className="input input-bordered"
-                {...register("password", { required: true })}
-              />
+              <div className="form-control w-full">
+                <label className="input input-bordered flex items-center justify-between">
+                  Category:
+                  <select
+                    className="w-10/12 bg-base-100 outline-none text-end"
+                    name="chairCoachSeat"
+                    {...register("seat", { required: true })}
+                  >
+                    <option value="chairCoachSeat">Chair Coach</option>
+                    <option value="singleCabinSeat">Single Cabin</option>
+                    <option value="vipCabinSeat">VIP Cabin</option>
+                  </select>
+                </label>
+              </div>
             </div>
             <div className="mt-6 flex justify-center">
               <button className="btn btn-sm text-xs bg-red-700 hover:bg-red-600 text-white">
-                Sign up
+                Submit
               </button>
             </div>
           </form>
-          <div className="text-center mb-8">
-            <h4 className="font-semibold">
-              Click here to login{" "}
-              <Link className="text-blue-800" href="/signIn">
-                Alreay have an account ?
-              </Link>
-            </h4>
-          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default SignUp;
+export default Booking;

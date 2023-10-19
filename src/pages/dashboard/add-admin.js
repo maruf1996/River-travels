@@ -1,33 +1,35 @@
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 
-const SignUp = () => {
+const AddAdmin = () => {
   const { register, handleSubmit } = useForm();
+
   const router = useRouter();
   const onSubmit = async (data) => {
-    console.log(data);
+    // console.log(data);
     try {
-      const res = await fetch(`http://localhost:5000/api/v1/auth/signup`, {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: { "Content-Type": "application/json" },
-      });
-      const user = await res.json();
+      const res = await fetch(
+        `http://localhost:5000/api/v1/admins/create-admin`,
+        {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      const admin = await res.json();
       // console.log(user);
-      if (user.status === "success") {
+      if (admin.status === "success") {
         Swal.fire({
           icon: "success",
           title: "Success",
-          text: "Sign up Successfully",
+          text: "Admin Created Successfully",
         });
-        router.push("/signIn");
+        router.push("/dashboard/user-management");
       } else {
         Swal.fire({
           title: "Oops...",
           text: "Something went wrong!",
-          text: "Sign up Successfully",
         });
       }
     } catch (error) {
@@ -35,18 +37,12 @@ const SignUp = () => {
       throw new Error(error.message);
     }
   };
-
   return (
     <div className="min-h-screen flex justify-center items-center bg-white p-4">
       <div className="lg:w-4/12 w-11/12">
         <div className="text-center mb-2">
-          <h2 className="font-bold text-2xl">Welcome To River Travrls!</h2>
-          <h4 className="text-xs">Please sign up with your email .</h4>
-        </div>
-        <div className="w-full bg-red-700 p-1 rounded-t-lg">
-          <h1 className=" text-center text-white font-semibold border-t-rounded">
-            Sign Up
-          </h1>
+          <h2 className="font-bold text-2xl">Add a Admin Or Super Admin</h2>
+          <h4 className="text-xs">fill the Admin document</h4>
         </div>
         <div className="card flex-shrink-0 w-full shadow-2xl bg-base-100">
           <form onSubmit={handleSubmit(onSubmit)} className="card-body">
@@ -111,24 +107,29 @@ const SignUp = () => {
                 {...register("password", { required: true })}
               />
             </div>
+            <div className="form-control">
+              <label className="input input-bordered flex items-center justify-between">
+                Role:
+                <select
+                  className="w-10/12 bg-base-100 outline-none text-end"
+                  name="admin"
+                  {...register("role", { required: true })}
+                >
+                  <option value="admin">Admin</option>
+                  <option value="super_admin">Super Admin</option>
+                </select>
+              </label>
+            </div>
             <div className="mt-6 flex justify-center">
               <button className="btn btn-sm text-xs bg-red-700 hover:bg-red-600 text-white">
-                Sign up
+                Submit
               </button>
             </div>
           </form>
-          <div className="text-center mb-8">
-            <h4 className="font-semibold">
-              Click here to login{" "}
-              <Link className="text-blue-800" href="/signIn">
-                Alreay have an account ?
-              </Link>
-            </h4>
-          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default SignUp;
+export default AddAdmin;

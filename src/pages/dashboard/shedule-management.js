@@ -1,24 +1,23 @@
 import {
-  useDeleteRootMutation,
-  useGetRootsQuery,
-  usePostRootMutation,
-} from "@/Redux/features/roots/rootApi";
+  useDeleteShedulesMutation,
+  useGetshedulesQuery,
+  usePostSheduleMutation,
+} from "@/Redux/features/shedule/sheduleApi";
 import DashboardLayout from "@/components/Layouts/DashboardLayout";
 import Loading from "@/components/UI/Loading";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 
-const RootManagement = () => {
+const SheduleManagement = () => {
   const { register, handleSubmit } = useForm();
-  const { data, isLoading } = useGetRootsQuery(undefined, {
+  const { data, isLoading } = useGetshedulesQuery(undefined, {
     refetchOnMountOrArgChange: true,
     pollingInterval: 2000,
   });
-  const [createRoot, { isSuccess }] = usePostRootMutation();
-  const [deleteRoot] = useDeleteRootMutation();
+  const [createShedule, { isSuccess }] = usePostSheduleMutation();
+  const [deleteShedule] = useDeleteShedulesMutation();
 
-  const roots = data?.data;
-  // console.log(createRoot);
+  const shedules = data?.data;
 
   if (isLoading) {
     return <Loading></Loading>;
@@ -28,36 +27,36 @@ const RootManagement = () => {
     const options = {
       data: { name: data?.name },
     };
-    createRoot(options)
+    createShedule(options)
       .unwrap()
       .then(() => {
         Swal.fire({
           icon: "success",
           title: "Success",
-          text: "Root Created Successfully",
+          text: "Shedule Created Successfully",
         });
       })
       .catch((error) => {
-        console.error("Error updating Root:", error);
+        console.error("Error updating book:", error);
       });
   };
 
-  const handleRootDelete = async (id) => {
+  const handleSheduleDelete = async (id) => {
     try {
-      await deleteRoot(id);
+      await deleteShedule(id);
       Swal.fire({
         icon: "success",
         title: "Success",
-        text: "Root Delete is Successfully",
+        text: "Shedule Delete is Successfully",
       });
     } catch (error) {
-      console.error("Error deleting Root:", error);
+      console.error("Error deleting Shedule:", error);
     }
   };
 
   return (
     <div className="lg:w-6/12 mx-auto my-16 p-4">
-      <h2 className="text-4xl font-bold mb-8 font-yeseva">Add a Root</h2>
+      <h2 className="text-4xl font-bold mb-8 font-yeseva">Add a Shedule</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="">
         <div className=" flex items-center">
           <div className="form-control w-full">
@@ -76,32 +75,29 @@ const RootManagement = () => {
         </div>
       </form>
       <div className="container mx-auto  mt-16">
-        <h2 className="mb-4 text-2xl font-semibold leadi">Root List</h2>
+        <h2 className="mb-4 text-2xl font-semibold leadi">Shedule List</h2>
         <div className="overflow-x-auto">
           <table className="min-w-full text-xs">
             <thead className="bg-gray-700 text-white">
               <tr className="text-left">
                 <th className="p-3">Index</th>
-                <th className="p-3">Root</th>
+                <th className="p-3">Shedule</th>
                 <th className="p-3 text-right">Remove</th>
               </tr>
             </thead>
             <tbody>
-              {roots.map((root, idx) => (
-                <tr
-                  key={root?.id || idx}
-                  className="border-b border-opacity-20"
-                >
+              {shedules.map((shedule, idx) => (
+                <tr key={shedule?.id} className="border-b border-opacity-20">
                   <td className="p-3">
                     <p>{idx + 1}</p>
                   </td>
                   <td className="p-3">
-                    <p>{root?.name}</p>
+                    <p>{shedule?.name}</p>
                   </td>
                   <td className="p-3 text-right">
                     <span className="px-3 py-1 font-semibold">
                       <button
-                        onClick={() => handleRootDelete(root?.id)}
+                        onClick={() => handleSheduleDelete(shedule?.id)}
                         className="btn btn-xs"
                       >
                         Delete
@@ -118,8 +114,8 @@ const RootManagement = () => {
   );
 };
 
-export default RootManagement;
+export default SheduleManagement;
 
-RootManagement.getLayout = function getLayout(page) {
+SheduleManagement.getLayout = function getLayout(page) {
   return <DashboardLayout>{page}</DashboardLayout>;
 };

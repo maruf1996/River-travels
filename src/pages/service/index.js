@@ -1,11 +1,23 @@
 import RootLayout from "@/components/Layouts/RootLayout";
+import Link from "next/link";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 const Service = () => {
   const { register, handleSubmit } = useForm();
+  const [lounchs, setLounchs] = useState([]);
+  const lounches = lounchs?.data;
+
   const onSubmit = async (data) => {
-    console.log(data);
+    const root = data.from + "-" + data.to;
+
+    const res = await fetch(
+      `http://localhost:5000/api/v1/launchs?searchTerm=${root}`
+    );
+    const lounchsData = await res.json();
+    setLounchs(lounchsData);
   };
+
   return (
     <div className="w-11/12 lg:w-6/12 mx-auto my-8">
       <div className="card flex-shrink-0 w-full shadow-2xl bg-base-100">
@@ -54,48 +66,51 @@ const Service = () => {
           </div>
         </form>
 
-        {/* table  */}
-        <div className="container p-2 mx-auto sm:p-4 dark:text-gray-100">
-          <h2 className="mb-4 text-2xl font-semibold text-center uppercase">
-            Searcheble lauche
-          </h2>
-          <div className="overflow-x-auto">
-            <table className="min-w-full text-xs">
-              <thead className="dark:bg-gray-700">
-                <tr className="text-left">
-                  <th className="p-3">Lauche</th>
-                  <th className="p-3">Root</th>
-                  <th className="p-3">Started time</th>
-                  <th className="p-3">Fare</th>
-                  <th className="p-3 ">Cabin</th>
-                  <th className="p-3">Details</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className="border-b border-opacity-20 border-gray-700 bg-gray-900 text-white">
-                  <td className="p-3 ">
-                    <p>Sundarban-6</p>
-                  </td>
-                  <td className="p-3">
-                    <p>Dhaka-Barishal</p>
-                  </td>
-                  <td className="p-3">
-                    <p>9:00 PM</p>
-                  </td>
-                  <td className="p-3">
-                    <p>700</p>
-                  </td>
-                  <td className="p-3">
-                    <p>24</p>
-                  </td>
-                  <td className="">
-                    <button className="btn btn-xs">Details</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+        {lounchs.status === "success" && (
+          <div className="container p-2 mx-auto sm:p-4 dark:text-gray-100">
+            <h2 className="mb-4 text-2xl font-semibold text-center uppercase">
+              Searchable launch
+            </h2>
+            <div className="overflow-x-auto">
+              <table className="min-w-full text-xs">
+                <thead>
+                  <tr className="text-left">
+                    <th className="p-3">Launch</th>
+                    <th className="p-3">Started Time</th>
+                    <th className="p-3">Root</th>
+                    <th className="p-3">Details</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {lounches?.map((lounch) => (
+                    <tr
+                      key={lounch.id}
+                      className="border-b border-opacity-20 border-gray-700 bg-gray-900 text-white"
+                    >
+                      <td className="p-3">
+                        <p>{lounch?.name}</p>
+                      </td>
+                      <td className="p-3">
+                        <p>{lounch?.shedule?.name}</p>
+                      </td>
+                      <td className="p-3">
+                        <p>{lounch?.root?.name}</p>{" "}
+                      </td>
+                      <td className="">
+                        <Link
+                          href={`/service/${lounch?.id}`}
+                          className="btn btn-xs"
+                        >
+                          Details
+                        </Link>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
