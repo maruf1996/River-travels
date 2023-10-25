@@ -42,7 +42,7 @@ const Booking = () => {
     };
     try {
       const res = await fetch(
-        `http://localhost:5000/api/v1/booking/create-booking`,
+        `https://river-travels-backend.vercel.app/api/v1/booking/create-booking`,
         {
           method: "POST",
           body: JSON.stringify(bookingData),
@@ -57,7 +57,7 @@ const Booking = () => {
           title: "Success",
           text: "Booking Created Successfully",
         });
-        router.push("/dashboard/my-booking");
+        router.push("/review");
       } else {
         Swal.fire({
           title: "Oops...",

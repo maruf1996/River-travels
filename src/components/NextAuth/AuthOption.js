@@ -20,11 +20,14 @@ export const AuthOptions = {
       async authorize(credentials, req) {
         // console.log(credentials);
         try {
-          const res = await fetch(`http://localhost:5000/api/v1/auth/signin`, {
-            method: "POST",
-            body: JSON.stringify(credentials),
-            headers: { "Content-Type": "application/json" },
-          });
+          const res = await fetch(
+            `https://river-travels-backend.vercel.app/api/v1/auth/signin`,
+            {
+              method: "POST",
+              body: JSON.stringify(credentials),
+              headers: { "Content-Type": "application/json" },
+            }
+          );
           const { token } = await res.json();
           const verifiedToken = jwtHelpers.verifyToken(
             token,

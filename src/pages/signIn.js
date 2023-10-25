@@ -24,11 +24,11 @@ const SignIn = () => {
         text: "Sign In Successfully",
       });
       router.push("/");
-    } else {
+    } else if (result.error) {
       Swal.fire({
         title: "Oops...",
         text: "Something went wrong!",
-        text: "Sign In Successfully",
+        text: "Sign In not Successfully",
       });
     }
   };

@@ -14,18 +14,9 @@ const UserManagement = () => {
   const [deleteTraveller] = useDeleteTravellerMutation();
   const [deleteStuff] = useDeleteStuffMutation();
   const [deleteAdmin] = useDeleteAdminMutation();
-  const { data: travellers, isLoading } = useGetTravellerQuery(undefined, {
-    refetchOnMountOrArgChange: true,
-    pollingInterval: 2000,
-  });
-  const { data: stuffs } = useGetStuffQuery(undefined, {
-    refetchOnMountOrArgChange: true,
-    pollingInterval: 2000,
-  });
-  const { data: admins } = useGetAdminQuery(undefined, {
-    refetchOnMountOrArgChange: true,
-    pollingInterval: 2000,
-  });
+  const { data: travellers, isLoading } = useGetTravellerQuery(undefined);
+  const { data: stuffs } = useGetStuffQuery(undefined);
+  const { data: admins } = useGetAdminQuery(undefined);
 
   const admin = admins?.data;
   const stuff = stuffs?.data;

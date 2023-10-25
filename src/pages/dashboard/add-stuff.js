@@ -10,7 +10,7 @@ const AddStuff = () => {
     // console.log(data);
     try {
       const res = await fetch(
-        `http://localhost:5000/api/v1/stuffs/create-stuff`,
+        `https://river-travels-backend.vercel.app/api/v1/stuffs/create-stuff`,
         {
           method: "POST",
           body: JSON.stringify(data),

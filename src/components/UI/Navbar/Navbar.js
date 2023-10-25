@@ -13,16 +13,16 @@ import Title from "./Title";
 const navLinks = [
   { id: "1", link: "/", title: "Home" },
   { id: "2", link: "/about-us", title: "About Us" },
-  { id: "3", link: "/", title: "Booking Procedure" },
-  { id: "4", link: "/", title: "Privacy Policy" },
-  { id: "5", link: "/", title: "Contact us" },
+  { id: "3", link: "/booking-procedure", title: "Booking Procedure" },
+  { id: "4", link: "/cancel-refund-policy", title: "Cancel Refund Policy" },
+  { id: "5", link: "/privacy-policy", title: "Privacy Policy" },
 ];
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [dashboarOpen, dashboarSetOpen] = useState(false);
   const session = useSession();
-  // console.log(session);
+  // console.log(session?.data?.role);
 
   return (
     <header className="">
@@ -32,7 +32,7 @@ const Navbar = () => {
           <div className="hidden lg:block">
             <Title></Title>
           </div>
-          <div className="hidden lg:block">
+          <div className="hidden lg:flex">
             <ul className="items-stretch lg:flex space-x-3">
               {navLinks.map((link) => (
                 <li key={link.id}>
@@ -48,7 +48,10 @@ const Navbar = () => {
           </div>
           <div className="">
             {session?.data === null ? (
-              <Link href="/signIn" className="font-semibold text-red-800">
+              <Link
+                href="/signIn"
+                className="font-semibold btn btn-sm text-red-800"
+              >
                 signIn
               </Link>
             ) : (

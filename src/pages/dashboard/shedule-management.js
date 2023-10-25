@@ -10,10 +10,7 @@ import Swal from "sweetalert2";
 
 const SheduleManagement = () => {
   const { register, handleSubmit } = useForm();
-  const { data, isLoading } = useGetshedulesQuery(undefined, {
-    refetchOnMountOrArgChange: true,
-    pollingInterval: 2000,
-  });
+  const { data, isLoading } = useGetshedulesQuery(undefined);
   const [createShedule, { isSuccess }] = usePostSheduleMutation();
   const [deleteShedule] = useDeleteShedulesMutation();
 
@@ -56,7 +53,9 @@ const SheduleManagement = () => {
 
   return (
     <div className="lg:w-6/12 mx-auto my-16 p-4">
-      <h2 className="text-4xl font-bold mb-8 font-yeseva">Add a Shedule</h2>
+      <h2 className="text-3xl lg:text-4xl font-bold mb-8 font-yeseva">
+        Add a Shedule
+      </h2>
       <form onSubmit={handleSubmit(onSubmit)} className="">
         <div className=" flex items-center">
           <div className="form-control w-full">
@@ -86,7 +85,7 @@ const SheduleManagement = () => {
               </tr>
             </thead>
             <tbody>
-              {shedules.map((shedule, idx) => (
+              {shedules?.map((shedule, idx) => (
                 <tr key={shedule?.id} className="border-b border-opacity-20">
                   <td className="p-3">
                     <p>{idx + 1}</p>

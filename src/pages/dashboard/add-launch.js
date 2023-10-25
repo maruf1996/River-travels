@@ -8,18 +8,9 @@ import Swal from "sweetalert2";
 
 const AddLaunch = () => {
   const { register, handleSubmit } = useForm();
-  const { data: stuffs } = useGetStuffQuery(undefined, {
-    refetchOnMountOrArgChange: true,
-    pollingInterval: 2000,
-  });
-  const { data: roots, isLoading } = useGetRootsQuery(undefined, {
-    refetchOnMountOrArgChange: true,
-    pollingInterval: 2000,
-  });
-  const { data: shedules } = useGetshedulesQuery(undefined, {
-    refetchOnMountOrArgChange: true,
-    pollingInterval: 2000,
-  });
+  const { data: stuffs } = useGetStuffQuery(undefined);
+  const { data: roots, isLoading } = useGetRootsQuery(undefined);
+  const { data: shedules } = useGetshedulesQuery(undefined);
   const router = useRouter();
 
   const stuff = stuffs?.data;
@@ -35,7 +26,7 @@ const AddLaunch = () => {
     console.log(data);
     try {
       const res = await fetch(
-        `http://localhost:5000/api/v1/launchs/create-launch`,
+        `https://river-travels-backend.vercel.app/api/v1/launchs/create-launch`,
         {
           method: "POST",
           body: JSON.stringify(data),

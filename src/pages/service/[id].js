@@ -14,19 +14,19 @@ const LaunchDetailsPage = () => {
 
   return (
     <div className=" min-h-screen flex justify-center items-center">
-      <div className="lg:w-6/12 mx-auto p-8 bg-red-700 rounded-lg shadow-lg">
-        <h2 className="text-5xl text-white font-semibold mb-4">
+      <div className="w-11/12 lg:w-6/12 mx-auto p-8 bg-rose-800 rounded-lg shadow-lg">
+        <h2 className="text-3xl lg:text-5xl text-white font-semibold mb-4">
           {launch?.name}
         </h2>
         <p
           className={`text-2xl ${
-            launch?.isAvailable ? "text-green-300" : "text-black"
+            launch?.isAvailable ? "text-green-500" : "text-black"
           }`}
         >
           {launch?.isAvailable ? "Available" : "Not Available"}
         </p>
         <div className="mt-8 text-white">
-          <div className=" flex justify-between">
+          <div className=" flex justify-between flex-col lg:flex-row">
             <p className="">
               <span className="font-semibold">Root:</span> {launch?.root?.name}
             </p>
@@ -39,37 +39,37 @@ const LaunchDetailsPage = () => {
               {launch?.stuff.name}
             </p>
           </div>
-          <div className="flex justify-between mt-8">
+          <div className="flex justify-between flex-col mt-8 lg:flex-row">
             <p className="">
-              <span className="font-semibold">Chair Coach Available:</span>{" "}
-              {launch?.chairCoachSeat}
+              <span className="font-semibold">Chair Coach Seat Available:</span>{" "}
+              {launch?.chairCoachSeat} ps
             </p>
             <p className="">
               <span className="font-semibold">Chair Coach Fare:</span>{" "}
               {launch?.chairCoachFare} Tk
             </p>
           </div>
-          <div className="flex justify-between mt-8">
+          <div className="flex justify-between flex-col mt-8 lg:flex-row">
             <p className="">
               <span className="font-semibold">Single Cabin Available:</span>{" "}
-              {launch?.singleCabinSeat}
+              {launch?.singleCabinSeat} ps
             </p>
             <p className="">
               <span className="font-semibold">Single Cabin Fare:</span>{" "}
               {launch?.singleCabinFare} Tk
             </p>
           </div>
-          <div className="flex justify-between mt-8">
+          <div className="flex justify-between flex-col mt-8 lg:flex-row">
             <p className="">
               <span className="font-semibold">VIP Cabin Avaolable:</span>{" "}
-              {launch?.vipCabinSeat}
+              {launch?.vipCabinSeat} ps
             </p>
             <p className="">
               <span className="font-semibold">VIP Cabin Fare:</span>{" "}
               {launch?.vipCabinFare} Tk
             </p>
           </div>
-          <div className="flex items-center justify-center">
+          <div className="flex items-center lg:justify-center mt-8">
             <Link href={`/service/Booking/${launch?.id}`} className="btn">
               Booking
             </Link>

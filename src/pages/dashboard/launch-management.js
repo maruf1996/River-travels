@@ -7,10 +7,7 @@ import Loading from "@/components/UI/Loading";
 import Swal from "sweetalert2";
 
 const LaunchManagement = () => {
-  const { data: launches, isLoading } = useGetleunchsQuery(undefined, {
-    refetchOnMountOrArgChange: true,
-    pollingInterval: 2000,
-  });
+  const { data: launches, isLoading } = useGetleunchsQuery(undefined);
   const launchs = launches?.data;
   const [deleteLaunch] = useDeleteLaunchsMutation();
 

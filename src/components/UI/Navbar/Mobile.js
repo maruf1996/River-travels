@@ -6,9 +6,9 @@ const Mobile = ({ navLinks, open, setOpen }) => {
       <div className="lg:hidden">
         <ul
           onClick={() => setOpen(!open)}
-          className={`items-stretch mt-3 ${
+          className={`items-stretch ${
             open
-              ? "flex flex-col fixed right-0 top-0 w-[80%] md:w-[50%] ease-in-out duration-500 bg-slate-300 h-full z-10 !important"
+              ? "flex flex-col fixed right-0 top-0 w-[90%] md:w-[80%] ease-in-out duration-500 bg-slate-300 h-full z-10 !important"
               : "fixed right-[-100%]"
           }`}
         >

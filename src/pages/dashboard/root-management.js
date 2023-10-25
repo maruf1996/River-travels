@@ -10,10 +10,7 @@ import Swal from "sweetalert2";
 
 const RootManagement = () => {
   const { register, handleSubmit } = useForm();
-  const { data, isLoading } = useGetRootsQuery(undefined, {
-    refetchOnMountOrArgChange: true,
-    pollingInterval: 2000,
-  });
+  const { data, isLoading } = useGetRootsQuery(undefined);
   const [createRoot, { isSuccess }] = usePostRootMutation();
   const [deleteRoot] = useDeleteRootMutation();
 
@@ -57,7 +54,9 @@ const RootManagement = () => {
 
   return (
     <div className="lg:w-6/12 mx-auto my-16 p-4">
-      <h2 className="text-4xl font-bold mb-8 font-yeseva">Add a Root</h2>
+      <h2 className="text-3xl lg:text-4xl font-bold mb-8 font-yeseva">
+        Add a Root
+      </h2>
       <form onSubmit={handleSubmit(onSubmit)} className="">
         <div className=" flex items-center">
           <div className="form-control w-full">
@@ -87,7 +86,7 @@ const RootManagement = () => {
               </tr>
             </thead>
             <tbody>
-              {roots.map((root, idx) => (
+              {roots?.map((root, idx) => (
                 <tr
                   key={root?.id || idx}
                   className="border-b border-opacity-20"

@@ -9,11 +9,14 @@ const SignUp = () => {
   const onSubmit = async (data) => {
     console.log(data);
     try {
-      const res = await fetch(`http://localhost:5000/api/v1/auth/signup`, {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: { "Content-Type": "application/json" },
-      });
+      const res = await fetch(
+        `https://river-travels-backend.vercel.app/api/v1/auth/signup`,
+        {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: { "Content-Type": "application/json" },
+        }
+      );
       const user = await res.json();
       // console.log(user);
       if (user.status === "success") {
@@ -27,7 +30,7 @@ const SignUp = () => {
         Swal.fire({
           title: "Oops...",
           text: "Something went wrong!",
-          text: "Sign up Successfully",
+          text: "Sign up not Successfully",
         });
       }
     } catch (error) {
